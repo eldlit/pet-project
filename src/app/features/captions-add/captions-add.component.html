@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="page">
+    <div class="form">
+      <div class="section">
+        <div class="file-input-container">
+          <button class="file-input-button" (click)="chooseFile()">Upload Video</button>
+          <input type="file" accept="video/*" (change)="onVideoSelected($event)" class="file-input-label" id="fileInput">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="color">
+          <div class="title-wrapper">
+            <h2 class="section-title">Font Color</h2>
+          </div>
+          <div class="color-picker-wrapper">
+            <ngx-colors ngx-colors-trigger [(ngModel)]="fontColorOverlay" (input)="generatePreviewImage()" class="color-picker"></ngx-colors>
+          </div>
+        </div>
+
+        <div class="color">
+          <div class="title-wrapper">
+            <h2 class="section-title">Background Color</h2>
+          </div>
+          <div class="color-picker-wrapper">
+            <ngx-colors ngx-colors-trigger [(ngModel)]="backgroundColorOverlay" (input)="generatePreviewImage()" class="color-picker"></ngx-colors>
+          </div>
+        </div>
+
+        <h2 class="section-title">Font size</h2>
+        <p-dropdown [options]="fontSizeOptions" [(ngModel)]="fontSize" optionLabel="label" optionValue="value" placeholder="Select font size" (onChange)="generatePreviewImage()" class="dropdown"></p-dropdown>
+
+
+        <h2 class="section-title">Text Placement</h2>
+        <p-dropdown [options]="textPlacementOptions" [(ngModel)]="textPlacement" optionLabel="label" optionValue="value" placeholder="Select text placement" (onChange)="generatePreviewImage()" class="dropdown"></p-dropdown>
+
+        <h2 class="section-title">Font style</h2>
+        <p-dropdown [options]="fontList" [(ngModel)]="fontFamily" optionLabel="label" optionValue="value" placeholder="Select font" (onChange)="generatePreviewImage()" class="dropdown"></p-dropdown>
+      </div>
+
+      <button type="submit" (click)="createVideo()" [disabled]="(videoGeneringInProgress$ | async) || !videoUrl" class="submit-button">Create your video</button>
+    </div>
+
+    <div *ngIf="videoUrl && !videoWithCaptions && !(videoGeneringInProgress$ | async); else loader" class="preview">
+      <video [ngClass]="previewImage ? 'd-none' : ''" #videoPlayer controls [src]="videoUrl" class="video-player"></video>
+      <img *ngIf="previewImage" [src]="previewImage" alt="Video Preview" class="image-preview">
+    </div>
+
+    <div *ngIf="videoWithCaptions" class="preview">
+      <video controls autoplay class="video-player">
+        <source [src]="videoWithCaptions" type="video/mp4">
+      </video>
+    </div>
+
+    <ng-template #loader>
+      <div *ngIf="videoGeneringInProgress$ | async" class="loader">
+        <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+      </div>
+    </ng-template>
+  </div>
+</div>

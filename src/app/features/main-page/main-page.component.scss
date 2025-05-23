@@ -1,0 +1,83 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #000000, #5a2360, #ff99cc);
+}
+
+.content {
+  text-align: center;
+  color: #ffffff;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.button {
+  padding: 15px 30px;
+  background-color: #ff99cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #ff4da6;
+}
+
+.title-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.title-button-container .button {
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px; /* Add padding to container */
+    box-sizing: border-box; /* Ensure padding doesn't increase container size */
+  }
+
+  .content {
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .title {
+    font-size: 36px; /* Reduce font size */
+    margin-right: 0; /* Remove right margin */
+    margin-bottom: 20px; /* Add bottom margin for spacing */
+    display: block; /* Set to block to take full width */
+  }
+
+  .button {
+    width: 100%; /* Make button full width */
+    padding: 15px; /* Reduce padding */
+    font-size: 20px; /* Reduce font size */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .title-button-container {
+    flex-direction: column; /* Stack title and button vertically */
+    align-items: center; /* Center align */
+  }
+}
